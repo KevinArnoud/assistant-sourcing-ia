@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant IA pour le Sourcing IT - Démo maquette</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a76a8;
+            --secondary: #0e2549;
+            --accent: #2bb5e8;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --code-bg: #1e1e1e;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --success: #28a745;
+            --streamlit-blue: #0e1117;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: var(--secondary);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            padding: 2rem 0;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: var(--primary);
+            color: white;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .screenshot {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background-color: var(--streamlit-blue);
+            color: white;
+        }
+        
+        .screenshot:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .screenshot-caption {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #e6e6e6;
+        }
+        
+        .streamlit-mockup {
+            background-color: var(--streamlit-blue);
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .streamlit-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .streamlit-header i {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+        
+        .streamlit-header h2 {
+            margin-bottom: 0;
+            color: white;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .feature p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+        
+        .tech-item {
+            background-color: var(--light);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tech-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .tech-logo {
+            height: 24px;
+            width: auto;
+        }
+        
+        .time-comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .time-card {
+            flex: 1 1 300px;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .time-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .time-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .time-item:last-child {
+            border-bottom: none;
+        }
+        
+        .total-time {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-top: 2px solid var(--primary);
+            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .roadmap {
+            margin: 2rem 0;
+        }
+        
+        .roadmap-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .roadmap-item {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .roadmap-icon {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .roadmap-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .roadmap-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .summary-box {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .time-comparison {
+                flex-direction: column;
+            }
+            
+            .screenshots {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🧠 Assistant IA pour le Sourcing IT</h1>
+            <p>Une maquette fonctionnelle pour automatiser et optimiser le processus de sourcing des profils IT, 100% conforme au RGPD</p>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <h2>🔍 Présentation du projet</h2>
+            <p>
+                Ce projet est une maquette fonctionnelle d'assistant IA pour les recruteurs IT, 
+                développée en Python avec Streamlit. L'objectif est d'automatiser plusieurs étapes du 
+                processus de sourcing des profils techniques tout en garantissant une conformité RGPD.
+            </p>
+            <div style="margin-bottom: 1.5rem;">
+                <span class="badge">Python</span>
+                <span class="badge">Streamlit</span>
+                <span class="badge">NLP</span>
+                <span class="badge">SerpAPI</span>
+                <span class="badge">RGPD Compliant</span>
+                <span class="badge">Application locale</span>
+            </div>
+            
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <span>🐍 Python 3.10+</span>
+                </div>
+                <div class="tech-item">
+                    <span>📊 Streamlit</span>
+                </div>
+                <div class="tech-item">
+                    <span>🔤 spaCy (fr_core_news_sm)</span>
+                </div>
+                <div class="tech-item">
+                    <span>📋 Pandas</span>
+                </div>
+                <div class="tech-item">
+                    <span>🔍 SerpAPI</span>
+                </div>
+                <div class="tech-item">
+                    <span>🔐 dotenv</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #f5f7fa;">
+        <div class="container">
+            <h2>📸 L'application en action</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">
+                Découvrez l'interface intuitive de cet Assistant IA pour le Sourcing IT
+            </p>
+            
+            <div class="screenshots">
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Interface d'analyse de fiche de poste" />
+                    <div class="screenshot-caption">
+                        Analyse NLP automatique de la fiche de poste - Détection des compétences et prérequis
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Compétences techniques détectées" />
+                    <div class="screenshot-caption">
+                        Détection automatique des compétences techniques requises pour le poste
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Expérience requise et filtres" />
+                    <div class="screenshot-caption">
+                        Analyse des années d'expérience requises et sélection des critères prioritaires
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Filtres par softskills et requête LinkedIn" />
+                    <div class="screenshot-caption">
+                        Filtrage par softskills et génération automatique de requête X-Ray LinkedIn
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Résultats SerpAPI - Profils LinkedIn" />
+                    <div class="screenshot-caption">
+                        Récupération automatique des profils LinkedIn correspondants via SerpAPI
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Tableau de présélection anonymisé" />
+                    <div class="screenshot-caption">
+                        Tableau de présélection avec scoring automatique des candidats
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Ajout manuel de profil" />
+                    <div class="screenshot-caption">
+                        Interface pour ajouter manuellement des profils avec notation automatique
+                    </div>
+                </div>
+                
+                <div class="screenshot">
+                    <img src="/api/placeholder/600/350" alt="Fiches candidats générées" />
+                    <div class="screenshot-caption">
+                        Fiches détaillées triées par score de correspondance pour faciliter la présélection
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>⚙️ Fonctionnalités clés</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Analyse NLP automatique</h3>
+                    <p>Extraction automatique des compétences techniques, softskills, localisations et années d'expérience requises d'une fiche de poste en français</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Génération de mots-clés enrichis</h3>
+                    <p>Enrichissement automatique avec synonymes et variantes pour optimiser les recherches de candidats</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Requêtes X-Ray LinkedIn</h3>
+                    <p>Construction automatique de requêtes Google X-Ray optimisées pour filtrer les profils LinkedIn correspondant à vos critères</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Intégration SerpAPI</h3>
+                    <p>Récupération directe d'URLs de profils LinkedIn réels pour commencer immédiatement votre prospection</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Tableau de présélection</h3>
+                    <p>Visualisation claire et triée des profils, avec calcul automatique du score de correspondance pour faciliter vos décisions</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">➕</div>
+                    <h3>Ajout manuel simplifié</h3>
+                    <p>Interface intuitive pour ajouter des profils manuellement tout en bénéficiant du scoring automatique</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📄</div>
+                    <h3>Fiches candidats détaillées</h3>
+                    <p>Génération automatique de fiches synthétiques pour chaque candidat avec leur score de correspondance</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Conformité RGPD</h3>
+                    <p>Traitement local, temporaire et anonymisé des données sans stockage permanent - parfaitement conforme aux exigences RGPD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #f5f7fa;">
+        <div class="container">
+            <h2>⏱️ Gain de temps exceptionnel</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">
+                Comparez le temps nécessaire pour effectuer un sourcing IT avec et sans notre assistant
+            </p>
+            
+            <div class="time-comparison">
+                <div class="time-card">
+                    <h3>⏰ Processus classique</h3>
+                    <div class="time-item">
+                        <span>Lecture et compréhension fiche de poste IT</span>
+                        <span>~20 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Définition manuelle des mots-clés</span>
+                        <span>~10 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Construction de la requête Google</span>
+                        <span>~10 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Recherche manuelle de profils</span>
+                        <span>~15-30 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Copie/colle des profils dans Excel</span>
+                        <span>~15 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Scorage manuel de la présélection</span>
+                        <span>~20 min</span>
+                    </div>
+                    <div class="total-time">
+                        <span>Temps total:</span>
+                        <span>1h30 - 2h</span>
+                    </div>
+                </div>
+                
+                <div class="time-card">
+                    <h3>🤖 Avec l'assistant IA</h3>
+                    <div class="time-item">
+                        <span>Copier/coller la fiche dans l'interface</span>
+                        <span>1 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Valider les mots-clés générés</span>
+                        <span>2-3 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Lancer la requête + récupérer les liens</span>
+                        <span>10 sec</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Générer ou ajouter les profils au tableau</span>
+                        <span>1-2 min</span>
+                    </div>
+                    <div class="time-item">
+                        <span>Lire le scoring / télécharger</span>
+                        <span>1 min</span>
+                    </div>
+                    <div class="total-time">
+                        <span>Temps total:</span>
+                        <span>5-10 min</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                ⚡ Gain estimé: 80% à 90% de temps économisé sur le sourcing initial
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>🔮 Évolutions futures (Roadmap)</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">
+                Vision d'évolution de l'assistant IA pour augmenter encore son efficacité
+            </p>
+            
+            <div class="roadmap-items">
+                <div class="roadmap-item">
+                    <div class="roadmap-icon">🔗</div>
+                    <h3>Intégration LinkedIn Recruiter</h3>
+                    <p>Connexion avec l'interface LinkedIn Recruiter via navigation automatisée pour extraction directe des profils sans scraping illégal</p>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-icon">📤</div>
+                    <h3>Export vers ATS/CRM RH</h3>
+                    <p>Export direct des profils vers un ATS ou CRM RH existant (format CSV/JSON/API REST) pour une intégration fluide à votre processus</p>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-icon">🧠</div>
+                    <h3>Auto-apprentissage</h3>
+                    <p>Entraînement d'un modèle ML basé sur les recrutements précédents pour affiner les scorings et les recommandations</p>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-icon">💬</div>
+                    <h3>Messages d'approche personnalisés</h3>
+                    <p>Génération automatique de messages LinkedIn d'approche adaptés au profil et à la fiche de poste pour maximiser le taux de réponse</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #f5f7fa;">
+        <div class="container">
+            <h2>💪 Points forts de cette solution</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">💻</div>
+                    <h3>100% en local</h3>
+                    <p>Fonctionne entièrement sur la machine du recruteur, compatible avec les environnements sensibles et restrictifs en matière de sécurité</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>RGPD Compliant</h3>
+                    <p>Pas de scraping illégal, pas de stockage de données personnelles - conformité totale avec les règlementations en vigueur</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">👤</div>
+                    <h3>Interface intuitive</h3>
+                    <p>Interface Streamlit moderne et simple à utiliser, ne nécessitant aucune formation technique spécifique pour les recruteurs</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📈</div>
+                    <h3>ROI immédiat</h3>
+                    <p>Démonstration claire d'une plus-value immédiate pour le recruteur dès la première utilisation avec un gain de temps considérable</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Maquette fonctionnelle - Assistant IA pour le Sourcing IT - 2025</p>
+            <p>Développement : Streamlit + Python - RGPD Compliant</p>
+        </div>
+    </footer>
+</body>
+</html>
